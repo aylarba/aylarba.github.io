@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aylar — Bioinformatics Scientist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B2430;
+    --paper:#F7F2EA;
+    --moss:#4C7A6D;
+    --moss-dim:#7C9C91;
+    --amber:#D98E4A;
+    --line: rgba(27,36,48,0.14);
+    --line-soft: rgba(27,36,48,0.08);
+    --mono:'IBM Plex Mono', monospace;
+    --sans:'IBM Plex Sans', sans-serif;
+    --serif:'Fraunces', serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .wrap{max-width:920px; margin:0 auto; padding:0 28px;}
+
+  /* ---- Nav ---- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(247,242,234,0.88);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    max-width:920px; margin:0 auto; padding:16px 28px;
+  }
+  .brand{font-family:var(--serif); font-weight:600; font-size:1.05rem; letter-spacing:0.01em;}
+  .navlinks{display:flex; gap:26px; list-style:none;}
+  .navlinks a{
+    font-family:var(--mono); font-size:0.78rem; text-transform:uppercase;
+    letter-spacing:0.08em; text-decoration:none; color:var(--ink); opacity:0.7;
+    transition:opacity 0.15s ease, color 0.15s ease;
+  }
+  .navlinks a:hover{opacity:1; color:var(--moss);}
+  .navlinks a:focus-visible{outline:2px solid var(--moss); outline-offset:3px;}
+
+  /* ---- Genomic ruler divider (signature element) ---- */
+  .ruler{width:100%; height:34px; display:block; margin:0 auto;}
+  .ruler-wrap{max-width:920px; margin:0 auto; padding:0 28px;}
+
+  /* ---- Hero ---- */
+  .hero{padding:88px 0 64px;}
+  .eyebrow{
+    font-family:var(--mono); font-size:0.78rem; color:var(--moss);
+    letter-spacing:0.1em; text-transform:uppercase; margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:''; width:22px; height:1px; background:var(--moss);}
+  h1{
+    font-family:var(--serif); font-weight:500;
+    font-size:clamp(2.1rem, 5vw, 3.4rem);
+    line-height:1.08; letter-spacing:-0.01em;
+    max-width:14ch;
+  }
+  .hero p.lede{
+    margin-top:22px; max-width:52ch; font-size:1.08rem; color:rgba(27,36,48,0.78);
+  }
+  .hero-links{margin-top:32px; display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono); font-size:0.82rem; text-decoration:none;
+    padding:10px 18px; border-radius:2px; border:1px solid var(--ink);
+    transition:background 0.15s ease, color 0.15s ease;
+  }
+  .btn.solid{background:var(--ink); color:var(--paper);}
+  .btn.solid:hover{background:var(--moss); border-color:var(--moss);}
+  .btn.ghost:hover{background:var(--ink); color:var(--paper);}
+
+  /* ---- Section shared ---- */
+  section{padding:64px 0;}
+  .section-head{margin-bottom:38px;}
+  .section-num{
+    font-family:var(--mono); font-size:0.78rem; color:var(--moss);
+    text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px;
+  }
+  h2{font-family:var(--serif); font-weight:500; font-size:1.9rem;}
+
+  /* ---- About ---- */
+  .about-grid{display:grid; grid-template-columns:1fr; gap:20px;}
+  .about-grid p{color:rgba(27,36,48,0.82); max-width:66ch;}
+  .pillrow{display:flex; flex-wrap:wrap; gap:8px; margin-top:22px;}
+  .pill{
+    font-family:var(--mono); font-size:0.76rem; padding:6px 12px;
+    border:1px solid var(--line); border-radius:999px; color:rgba(27,36,48,0.75);
+  }
+
+  /* ---- Projects ---- */
+  .project{
+    border-top:1px solid var(--line-soft);
+    padding:28px 0; display:grid; grid-template-columns:120px 1fr; gap:24px;
+    transition:padding-left 0.2s ease;
+  }
+  .project:hover{padding-left:6px;}
+  .project:last-child{border-bottom:1px solid var(--line-soft);}
+  .project-tag{
+    font-family:var(--mono); font-size:0.72rem; color:var(--moss);
+    text-transform:uppercase; letter-spacing:0.06em; padding-top:4px;
+  }
+  .project h3{font-family:var(--serif); font-weight:500; font-size:1.28rem; margin-bottom:8px;}
+  .project p{color:rgba(27,36,48,0.78); max-width:60ch;}
+  .stackline{
+    margin-top:12px; font-family:var(--mono); font-size:0.76rem; color:var(--amber);
+  }
+
+  /* ---- Experience ---- */
+  .exp{
+    display:grid; grid-template-columns:160px 1fr; gap:24px;
+    padding:22px 0; border-top:1px solid var(--line-soft);
+  }
+  .exp:last-child{border-bottom:1px solid var(--line-soft);}
+  .exp-date{font-family:var(--mono); font-size:0.76rem; color:rgba(27,36,48,0.55); padding-top:3px;}
+  .exp h3{font-family:var(--serif); font-size:1.1rem; font-weight:500;}
+  .exp .org{font-family:var(--mono); font-size:0.78rem; color:var(--moss); margin:4px 0 10px;}
+  .exp p{color:rgba(27,36,48,0.78); max-width:60ch; font-size:0.96rem;}
+
+  /* ---- Skills ---- */
+  .skills-track{
+    display:flex; flex-wrap:wrap; gap:10px;
+  }
+  .skill{
+    font-family:var(--mono); font-size:0.8rem;
+    padding:8px 14px; background:rgba(76,122,109,0.08);
+    border:1px solid var(--line-soft); border-radius:2px;
+  }
+
+  /* ---- Contact ---- */
+  .contact{
+    background:var(--ink); color:var(--paper);
+    padding:70px 0 60px; margin-top:20px;
+  }
+  .contact h2{color:var(--paper);}
+  .contact .section-num{color:var(--amber);}
+  .contact p.lede{color:rgba(247,242,234,0.72); max-width:48ch; margin-top:14px;}
+  .contact-links{margin-top:30px; display:flex; flex-direction:column; gap:10px;}
+  .contact-links a{
+    font-family:var(--mono); font-size:0.95rem; text-decoration:none;
+    border-bottom:1px solid rgba(247,242,234,0.25); width:fit-content; padding-bottom:2px;
+    transition:border-color 0.15s ease, color 0.15s ease;
+  }
+  .contact-links a:hover{border-color:var(--amber); color:var(--amber);}
+
+  footer{
+    background:var(--ink); color:rgba(247,242,234,0.45);
+    text-align:center; font-family:var(--mono); font-size:0.72rem;
+    padding:20px 0 30px;
+  }
+
+  /* ---- Reveal on scroll ---- */
+  .reveal{opacity:0; transform:translateY(14px); transition:opacity 0.6s ease, transform 0.6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .reveal{opacity:1; transform:none; transition:none;}
+  }
+
+  @media (max-width:640px){
+    .navlinks{gap:16px;}
+    .project, .exp{grid-template-columns:1fr; gap:6px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="brand">Aylar<span style="color:var(--moss)">.</span></div>
+    <ul class="navlinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- Genomic ruler divider, reused as a section signature -->
+<svg class="ruler" viewBox="0 0 920 34" preserveAspectRatio="none" aria-hidden="true">
+  <line x1="0" y1="17" x2="920" y2="17" stroke="rgba(27,36,48,0.15)" stroke-width="1"/>
+  <g stroke="rgba(76,122,109,0.55)" stroke-width="1" font-family="IBM Plex Mono" font-size="8" fill="rgba(27,36,48,0.4)">
+    <line x1="20" y1="10" x2="20" y2="24"/><text x="24" y="12">chr1</text>
+    <line x1="180" y1="13" x2="180" y2="21"/>
+    <line x1="340" y1="13" x2="340" y2="21"/>
+    <line x1="500" y1="10" x2="500" y2="24"/><text x="504" y="12">chr7</text>
+    <line x1="660" y1="13" x2="660" y2="21"/>
+    <line x1="820" y1="13" x2="820" y2="21"/>
+    <line x1="900" y1="10" x2="900" y2="24"/><text x="866" y="12">chrX</text>
+  </g>
+</svg>
+
+<div class="wrap">
+
+  <section class="hero" id="top">
+    <div class="eyebrow">Bioinformatics Scientist</div>
+    <h1>Turning pediatric cancer genomic data into answers.</h1>
+    <p class="lede">
+      I build harmonized NGS pipelines and analysis workflows across large multi-cohort
+      pediatric cancer datasets — RNA-seq, WGS/WES, DNA methylation, and neoantigen
+      prediction — so researchers can trust what the data says.
+    </p>
+    <div class="hero-links">
+      <a class="btn solid" href="#projects">See my work</a>
+      <a class="btn ghost" href="#contact">Get in touch</a>
+    </div>
+  </section>
+
+  <section id="about" class="reveal">
+    <div class="section-head">
+      <div class="section-num">01 — About</div>
+      <h2>Background</h2>
+    </div>
+    <div class="about-grid">
+      <p>
+        I'm a Bioinformatics Scientist working within a pediatric cancer research core,
+        where I develop and run NGS analysis pipelines — RNA-seq, WGS/WES, and DNA
+        methylation — across large harmonized cohorts, alongside HLA typing and
+        neoantigen prediction work. I build and maintain CWL workflows, run compute on
+        AWS and CAVATICA/Seven Bridges, and work across HPC environments in Python, R,
+        and Bash.
+      </p>
+      <p>
+        Before this, my graduate research focused on LC/MS metabolomics — quantifying
+        small molecules to understand disease-relevant biology, which is where my interest
+        in translating raw signal into biological insight first took shape. I hold an
+        M.S. in Bioinformatics and a B.S. in Chemistry.
+      </p>
+      <div class="pillrow">
+        <span class="pill">NGS Pipelines</span>
+        <span class="pill">HLA Typing &amp; Neoantigens</span>
+        <span class="pill">Multi-cohort Harmonization</span>
+        <span class="pill">CWL Workflows</span>
+        <span class="pill">Cloud &amp; HPC</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="reveal">
+    <div class="section-head">
+      <div class="section-num">02 — Selected Work</div>
+      <h2>Projects</h2>
+    </div>
+
+    <div class="project">
+      <div class="project-tag">Manuscript</div>
+      <div>
+        <h3>NF1 Neoantigen Data Audit</h3>
+        <p>
+          Led a full data audit for an NF1 neoantigen manuscript ahead of submission,
+          identifying and resolving a denominator discrepancy and a figure mismatch that
+          would have affected the reported results.
+        </p>
+        <div class="stackline">HLA typing · neoantigen prediction · QC</div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-tag">Pipeline</div>
+      <div>
+        <h3>RNA-seq Merge Workflow, DepMap Cohort</h3>
+        <p>
+          Executed a CWL-based RNA-seq merge pipeline end-to-end on EC2 using cwltool
+          for a large-scale DepMap cohort, handling the infrastructure and data
+          orchestration required to process it reliably at scale.
+        </p>
+        <div class="stackline">CWL · AWS EC2 · cwltool</div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-tag">Data Harmonization</div>
+      <div>
+        <h3>Cross-Cohort DNA Methylation Reference Table</h3>
+        <p>
+          Built an IDAT cross-reference table spanning multiple pediatric cancer cohorts
+          (MCI, PBTA, RBT, NF1) to unify methylation array sample tracking across
+          previously siloed datasets.
+        </p>
+        <div class="stackline">DNA methylation · Python · multi-cohort QC</div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-tag">Open Science</div>
+      <div>
+        <h3>OpenPedCan Rare CNS Molecular Subtyping</h3>
+        <p>
+          Contributed a pull request implementing DKFZ v12 methylation-based
+          classification for rare CNS tumor subtyping within the open-source OpenPedCan
+          project.
+        </p>
+        <div class="stackline">Methylation classification · open-source · R</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="reveal">
+    <div class="section-head">
+      <div class="section-num">03 — Experience</div>
+      <h2>Where I've worked</h2>
+    </div>
+
+    <div class="exp">
+      <div class="exp-date">2023 — Present</div>
+      <div>
+        <h3>Bioinformatics Scientist</h3>
+        <div class="org">BTI Bioinformatics Core · Children's National Hospital</div>
+        <p>
+          NGS analysis across RNA-seq, WGS/WES, and DNA methylation for pediatric cancer
+          cohorts; HLA typing and neoantigen prediction; CWL pipeline development on AWS
+          and CAVATICA; multi-cohort harmonization across Kids First and OpenPedCan.
+        </p>
+      </div>
+    </div>
+
+    <div class="exp">
+      <div class="exp-date">Graduate</div>
+      <div>
+        <h3>Graduate Researcher</h3>
+        <div class="org">Rahnavard Lab · George Washington University</div>
+        <p>
+          LC/MS metabolomics research on the iHMP/massSight projects — quantifying and
+          interpreting small-molecule signal in large-scale human microbiome data.
+        </p>
+      </div>
+    </div>
+
+    <div class="exp">
+      <div class="exp-date">Undergraduate</div>
+      <div>
+        <h3>B.S. Chemistry</h3>
+        <div class="org">Shiraz University</div>
+        <p>Foundational training in chemistry ahead of a transition into computational biology.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="reveal">
+    <div class="section-head">
+      <div class="section-num">04 — Toolkit</div>
+      <h2>Tech stack</h2>
+    </div>
+    <div class="skills-track">
+      <span class="skill">Python</span>
+      <span class="skill">R</span>
+      <span class="skill">Bash</span>
+      <span class="skill">CWL</span>
+      <span class="skill">AWS (S3 / EC2)</span>
+      <span class="skill">CAVATICA / Seven Bridges</span>
+      <span class="skill">HPC</span>
+      <span class="skill">RNA-seq</span>
+      <span class="skill">WGS / WES</span>
+      <span class="skill">DNA Methylation</span>
+      <span class="skill">HLA Typing</span>
+      <span class="skill">Neoantigen Prediction</span>
+    </div>
+  </section>
+
+</div>
+
+<section id="contact" class="contact reveal">
+  <div class="wrap">
+    <div class="section-num">05 — Contact</div>
+    <h2>Let's talk</h2>
+    <p class="lede">
+      Open to conversations about pediatric cancer genomics, bioinformatics roles, and
+      collaborations. Reach out any time.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:your.email@example.com">your.email@example.com</a>
+      <a href="https://github.com/your-github" target="_blank" rel="noopener">github.com/your-github</a>
+      <a href="https://www.linkedin.com/in/your-linkedin" target="_blank" rel="noopener">linkedin.com/in/your-linkedin</a>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Aylar. Built with data and code.</footer>
+
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>

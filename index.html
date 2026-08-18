@@ -15,10 +15,24 @@
     --amber:#D98E4A;
     --line: rgba(27,36,48,0.14);
     --line-soft: rgba(27,36,48,0.08);
+    --glass-bg: rgba(255,255,255,0.35);
+    --glass-border: rgba(255,255,255,0.5);
     --mono:'IBM Plex Mono', monospace;
     --sans:'IBM Plex Sans', sans-serif;
     --serif:'Fraunces', serif;
   }
+  [data-theme="dark"]{
+    --ink:#F2EFE9;
+    --paper:#14181F;
+    --moss:#7FB5A3;
+    --moss-dim:#5C8A79;
+    --amber:#E8A863;
+    --line: rgba(242,239,233,0.16);
+    --line-soft: rgba(242,239,233,0.09);
+    --glass-bg: rgba(255,255,255,0.06);
+    --glass-border: rgba(255,255,255,0.12);
+  }
+  body{transition: background 0.3s ease, color 0.3s ease;}
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
   body{
@@ -51,10 +65,15 @@
   }
   .navlinks a:hover{opacity:1; color:var(--moss);}
   .navlinks a:focus-visible{outline:2px solid var(--moss); outline-offset:3px;}
+  .theme-toggle{
+    position:fixed; top:16px; right:24px; z-index:60;
+    width:36px; height:36px; border-radius:50%;
+    border:1px solid var(--line); background:var(--paper);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; font-size:1rem; transition:transform 0.2s ease;
+  }
+  .theme-toggle:hover{transform:scale(1.1);}
 
-  /* ---- Genomic ruler divider (signature element) ---- */
-  .ruler{width:100%; height:34px; display:block; margin:0 auto;}
-  .ruler-wrap{max-width:920px; margin:0 auto; padding:0 28px;}
 
   /* ---- Hero ---- */
   .hero{padding:88px 0 64px;}
@@ -70,14 +89,16 @@
     max-width:14ch;
   }
   .hero p.lede{
-    margin-top:22px; max-width:52ch; font-size:1.08rem; color:rgba(27,36,48,0.78);
+    margin-top:22px; max-width:52ch; font-size:1.08rem; color:var(--ink); opacity:0.78;
   }
   .hero-links{margin-top:32px; display:flex; gap:14px; flex-wrap:wrap;}
   .btn{
     font-family:var(--mono); font-size:0.82rem; text-decoration:none;
     padding:10px 18px; border-radius:2px; border:1px solid var(--ink);
-    transition:background 0.15s ease, color 0.15s ease;
+    transition:background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+    display:inline-block;
   }
+  .btn:hover{transform: translateY(-2px);}
   .btn.solid{background:var(--ink); color:var(--paper);}
   .btn.solid:hover{background:var(--moss); border-color:var(--moss);}
   .btn.ghost:hover{background:var(--ink); color:var(--paper);}
@@ -93,11 +114,11 @@
 
   /* ---- About ---- */
   .about-grid{display:grid; grid-template-columns:1fr; gap:20px;}
-  .about-grid p{color:rgba(27,36,48,0.82); max-width:66ch;}
+  .about-grid p{color:var(--ink); opacity:0.82; max-width:66ch;}
   .pillrow{display:flex; flex-wrap:wrap; gap:8px; margin-top:22px;}
   .pill{
     font-family:var(--mono); font-size:0.76rem; padding:6px 12px;
-    border:1px solid var(--line); border-radius:999px; color:rgba(27,36,48,0.75);
+    border:1px solid var(--line); border-radius:999px; color:var(--ink); opacity:0.75;
   }
 
   /* ---- Projects ---- */
@@ -113,7 +134,7 @@
     text-transform:uppercase; letter-spacing:0.06em; padding-top:4px;
   }
   .project h3{font-family:var(--serif); font-weight:500; font-size:1.28rem; margin-bottom:8px;}
-  .project p{color:rgba(27,36,48,0.78); max-width:60ch;}
+  .project p{color:var(--ink); opacity:0.78; max-width:60ch;}
   .stackline{
     margin-top:12px; font-family:var(--mono); font-size:0.76rem; color:var(--amber);
   }
@@ -124,10 +145,10 @@
     padding:22px 0; border-top:1px solid var(--line-soft);
   }
   .exp:last-child{border-bottom:1px solid var(--line-soft);}
-  .exp-date{font-family:var(--mono); font-size:0.76rem; color:rgba(27,36,48,0.55); padding-top:3px;}
+  .exp-date{font-family:var(--mono); font-size:0.76rem; color:var(--ink); opacity:0.55; padding-top:3px;}
   .exp h3{font-family:var(--serif); font-size:1.1rem; font-weight:500;}
   .exp .org{font-family:var(--mono); font-size:0.78rem; color:var(--moss); margin:4px 0 10px;}
-  .exp p{color:rgba(27,36,48,0.78); max-width:60ch; font-size:0.96rem;}
+  .exp p{color:var(--ink); opacity:0.78; max-width:60ch; font-size:0.96rem;}
 
   /* ---- Skills ---- */
   .skills-track{
@@ -144,16 +165,23 @@
     display:grid; grid-template-columns:repeat(4, 1fr); gap:24px;
   }
   .outside-card{
-    border-top:1px solid var(--line-soft); padding-top:20px;
+    border:1px solid var(--glass-border);
+    background:var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius:14px;
+    padding:22px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
-  .outside-card .glyph{
-    font-family:var(--serif); font-size:1.6rem; color:var(--moss); margin-bottom:10px;
+  .outside-card:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+  }
+  .outside-card p{
+    color:var(--ink); opacity:0.78; font-size:0.94rem; max-width:32ch;
   }
   .outside-card h3{
     font-family:var(--serif); font-weight:500; font-size:1.1rem; margin-bottom:8px;
-  }
-  .outside-card p{
-    color:rgba(27,36,48,0.78); font-size:0.94rem; max-width:32ch;
   }
   @media (max-width:640px){
     .outside-grid{grid-template-columns:1fr; gap:30px;}
@@ -169,7 +197,7 @@
     display:flex; justify-content:space-between; align-items:baseline; gap:16px;
   }
   .note-date{
-    font-family:var(--mono); font-size:0.74rem; color:rgba(27,36,48,0.5);
+    font-family:var(--mono); font-size:0.74rem; color:var(--ink); opacity:0.5;
     white-space:nowrap;
   }
   .note-title{
@@ -185,20 +213,20 @@
   }
   .note.open .note-body{max-height:600px;}
   .note-body-inner{
-    padding-top:14px; color:rgba(27,36,48,0.8); font-size:0.96rem; max-width:64ch;
+    padding-top:14px; color:var(--ink); opacity:0.8; font-size:0.96rem; max-width:64ch;
   }
 
   /* ---- Contact ---- */
   .contact{
-    background:var(--ink); color:var(--paper);
+    background:#1B2430; color:#F7F2EA;
     padding:70px 0 60px; margin-top:20px;
   }
-  .contact h2{color:var(--paper);}
+  .contact h2{color:#F7F2EA;}
   .contact .section-num{color:var(--amber);}
   .contact p.lede{color:rgba(247,242,234,0.72); max-width:48ch; margin-top:14px;}
   .contact-links{margin-top:30px; display:flex; flex-direction:column; gap:10px;}
   .contact-links a{
-    font-family:var(--mono); font-size:0.95rem; text-decoration:none;
+    font-family:var(--mono); font-size:0.95rem; text-decoration:none; color:#F7F2EA;
     border-bottom:1px solid rgba(247,242,234,0.25); width:fit-content; padding-bottom:2px;
     transition:border-color 0.15s ease, color 0.15s ease;
   }
@@ -210,7 +238,7 @@
   }
 
   footer{
-    background:var(--ink); color:rgba(247,242,234,0.45);
+    background:#1B2430; color:rgba(247,242,234,0.45);
     text-align:center; font-family:var(--mono); font-size:0.72rem;
     padding:20px 0 30px;
   }
@@ -228,11 +256,32 @@
     .navlinks{gap:16px;}
     .project, .exp{grid-template-columns:1fr; gap:6px;}
   }
+  .cursor-dot{
+    position:fixed; top:0; left:0; width:8px; height:8px; border-radius:50%;
+    background:var(--amber); pointer-events:none; z-index:9999;
+    transform:translate(-50%,-50%);
+    transition: transform 0.08s ease-out, opacity 0.2s ease;
+    opacity:0;
+  }
+  .cursor-ring{
+    position:fixed; top:0; left:0; width:28px; height:28px; border-radius:50%;
+    border:1px solid var(--moss); pointer-events:none; z-index:9998;
+    transform:translate(-50%,-50%);
+    transition: transform 0.15s ease-out, opacity 0.2s ease;
+    opacity:0;
+  }
+  @media (hover:none){
+    .cursor-dot, .cursor-ring{display:none;}
+  }
 </style>
 </head>
 <body>
 
+<div class="cursor-dot" id="cursor-dot"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
 <header>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">☾</button>
   <nav>
     <ul class="navlinks">
       <li><a href="#about">About</a></li>
@@ -240,24 +289,13 @@
       <li><a href="#experience">Experience</a></li>
       <li><a href="#outside">Also, Me</a></li>
       <li><a href="#blog">Notes</a></li>
+      <li><a href="#posts">Posts</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
 </header>
 
-<!-- Ruler divider, signature element -->
-<svg class="ruler" viewBox="0 0 920 34" preserveAspectRatio="none" aria-hidden="true">
-  <line x1="0" y1="17" x2="920" y2="17" stroke="rgba(27,36,48,0.15)" stroke-width="1"/>
-  <g stroke="rgba(76,122,109,0.55)" stroke-width="1">
-    <line x1="20" y1="10" x2="20" y2="24"/>
-    <line x1="180" y1="13" x2="180" y2="21"/>
-    <line x1="340" y1="13" x2="340" y2="21"/>
-    <line x1="500" y1="10" x2="500" y2="24"/>
-    <line x1="660" y1="13" x2="660" y2="21"/>
-    <line x1="820" y1="13" x2="820" y2="21"/>
-    <line x1="900" y1="10" x2="900" y2="24"/>
-  </g>
-</svg>
+
 
 <div class="wrap">
 
@@ -472,7 +510,7 @@
     </div>
   </section>
 
-  <section id="outside" class="reveal">
+  <section id="outside" class="reveal" style="background: radial-gradient(circle at 20% 20%, rgba(76,122,109,0.15), transparent 50%), radial-gradient(circle at 80% 70%, rgba(217,142,74,0.15), transparent 50%); border-radius:20px; padding:48px 28px;">
     <div class="section-head">
       <div class="section-num">05 · Also, Me</div>
       <h2>The parts that don't fit in a pipeline</h2>
@@ -520,11 +558,19 @@
     <div id="notes-list"></div>
   </section>
 
+  <section id="posts" class="reveal">
+    <div class="section-head">
+      <div class="section-num">07 · Featured Posts</div>
+      <h2>From X</h2>
+    </div>
+    <blockquote class="twitter-tweet"><p lang="en" dir="ltr">so excited! I received a travel award for the BioHackathon at <a href="https://x.com/StJudeResearch?ref_src=twsrc%5Etfw">@StJudeResearch</a> ! cant wait for making new connections and digging into some hands-on bioinformatics work. <a href="https://x.com/hashtag/BioHackathon?src=hash&amp;ref_src=twsrc%5Etfw">#BioHackathon</a> <a href="https://x.com/hashtag/Bioinformatics?src=hash&amp;ref_src=twsrc%5Etfw">#Bioinformatics</a> <a href="https://x.com/hashtag/PediatricCancerResearch?src=hash&amp;ref_src=twsrc%5Etfw">#PediatricCancerResearch</a></p>&mdash; Aylar (@aylllarba) <a href="https://x.com/aylllarba/status/2089348726963793972?ref_src=twsrc%5Etfw">August 17, 2026</a></blockquote>
+  </section>
+
 </div>
 
 <section id="contact" class="contact reveal">
   <div class="wrap">
-    <div class="section-num">07 · Contact</div>
+    <div class="section-num">08 · Contact</div>
     <h2>Let's talk</h2>
     <p class="lede">
       Open to conversations about opportunities. Reach out any time.
@@ -554,6 +600,66 @@
 </footer>
 
 <script>
+  // ---- Dark mode ----
+  const themeToggle = document.getElementById('theme-toggle');
+  const applyTheme = (theme) => {
+    document.documentElement.setAttribute('data-theme', theme);
+    themeToggle.textContent = theme === 'dark' ? '☀' : '☾';
+    localStorage.setItem('theme', theme);
+  };
+  const savedTheme = localStorage.getItem('theme') ||
+    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  applyTheme(savedTheme);
+  themeToggle.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    applyTheme(current === 'dark' ? 'light' : 'dark');
+  });
+
+  // ---- Cursor follower ----
+  const dot = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+  let ringX = 0, ringY = 0;
+  window.addEventListener('mousemove', (e) => {
+    dot.style.opacity = '1';
+    ring.style.opacity = '1';
+    dot.style.left = e.clientX + 'px';
+    dot.style.top = e.clientY + 'px';
+    ringX = e.clientX; ringY = e.clientY;
+  });
+  (function animateRing(){
+    const rect = ring.getBoundingClientRect();
+    const curX = rect.left + rect.width/2 || 0;
+    const curY = rect.top + rect.height/2 || 0;
+    const nx = curX + (ringX - curX) * 0.15;
+    const ny = curY + (ringY - curY) * 0.15;
+    ring.style.left = nx + 'px';
+    ring.style.top = ny + 'px';
+    requestAnimationFrame(animateRing);
+  })();
+  document.querySelectorAll('a, button, .project, .outside-card, .note').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.style.transform = 'translate(-50%,-50%) scale(1.6)');
+    el.addEventListener('mouseleave', () => ring.style.transform = 'translate(-50%,-50%) scale(1)');
+  });
+
+  // ---- Easter egg ----
+  console.log('%cLooking under the hood, huh?', 'font-family:monospace; font-size:14px; color:#4C7A6D;');
+  console.log('%cIf you found this, you probably like reading code as much as I do. Say hi: babaei.aylar@gmail.com', 'font-family:monospace; font-size:12px; color:#1B2430;');
+  let typed = '';
+  window.addEventListener('keydown', (e) => {
+    typed += e.key.toLowerCase();
+    typed = typed.slice(-6);
+    if (typed === 'genome') {
+      const burst = document.createElement('div');
+      burst.style.cssText = 'position:fixed; inset:0; display:flex; align-items:center; justify-content:center; z-index:10000; pointer-events:none;';
+      burst.innerHTML = '<div style="font-family:var(--serif); font-size:1.4rem; background:var(--ink); color:var(--paper); padding:18px 26px; border-radius:10px; box-shadow:0 20px 40px rgba(0,0,0,0.3); animation: popIn 0.4s ease;">You found it. High five, fellow curious mind.</div>';
+      document.body.appendChild(burst);
+      setTimeout(() => burst.remove(), 2600);
+    }
+  });
+  const style = document.createElement('style');
+  style.textContent = '@keyframes popIn{0%{transform:scale(0.7); opacity:0;} 100%{transform:scale(1); opacity:1;}}';
+  document.head.appendChild(style);
+
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{
       if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
@@ -592,6 +698,8 @@
     notesList.appendChild(el);
   });
 </script>
+
+<script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
 
 </body>
 </html>

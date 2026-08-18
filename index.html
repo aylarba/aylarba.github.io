@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aylar — Bioinformatics Scientist</title>
+<title>Aylar · Bioinformatics Scientist</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -39,7 +39,7 @@
     border-bottom:1px solid var(--line-soft);
   }
   nav{
-    display:flex; align-items:center; justify-content:space-between;
+    display:flex; align-items:center; justify-content:center;
     max-width:920px; margin:0 auto; padding:16px 28px;
   }
   .brand{font-family:var(--serif); font-weight:600; font-size:1.05rem; letter-spacing:0.01em;}
@@ -63,7 +63,6 @@
     letter-spacing:0.1em; text-transform:uppercase; margin-bottom:18px;
     display:flex; align-items:center; gap:10px;
   }
-  .eyebrow::before{content:''; width:22px; height:1px; background:var(--moss);}
   h1{
     font-family:var(--serif); font-weight:500;
     font-size:clamp(2.1rem, 5vw, 3.4rem);
@@ -140,6 +139,55 @@
     border:1px solid var(--line-soft); border-radius:2px;
   }
 
+  /* ---- Outside the Lab ---- */
+  .outside-grid{
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:24px;
+  }
+  .outside-card{
+    border-top:1px solid var(--line-soft); padding-top:20px;
+  }
+  .outside-card .glyph{
+    font-family:var(--serif); font-size:1.6rem; color:var(--moss); margin-bottom:10px;
+  }
+  .outside-card h3{
+    font-family:var(--serif); font-weight:500; font-size:1.1rem; margin-bottom:8px;
+  }
+  .outside-card p{
+    color:rgba(27,36,48,0.78); font-size:0.94rem; max-width:32ch;
+  }
+  @media (max-width:640px){
+    .outside-grid{grid-template-columns:1fr; gap:30px;}
+  }
+
+  /* ---- Blog / Notes ---- */
+  .note{
+    border-top:1px solid var(--line-soft);
+    padding:22px 0; cursor:pointer;
+  }
+  .note:last-child{border-bottom:1px solid var(--line-soft);}
+  .note-head{
+    display:flex; justify-content:space-between; align-items:baseline; gap:16px;
+  }
+  .note-date{
+    font-family:var(--mono); font-size:0.74rem; color:rgba(27,36,48,0.5);
+    white-space:nowrap;
+  }
+  .note-title{
+    font-family:var(--serif); font-weight:500; font-size:1.12rem;
+  }
+  .note-toggle{
+    font-family:var(--mono); font-size:0.9rem; color:var(--moss);
+    transition:transform 0.2s ease;
+  }
+  .note.open .note-toggle{transform:rotate(45deg);}
+  .note-body{
+    max-height:0; overflow:hidden; transition:max-height 0.3s ease;
+  }
+  .note.open .note-body{max-height:600px;}
+  .note-body-inner{
+    padding-top:14px; color:rgba(27,36,48,0.8); font-size:0.96rem; max-width:64ch;
+  }
+
   /* ---- Contact ---- */
   .contact{
     background:var(--ink); color:var(--paper);
@@ -155,6 +203,11 @@
     transition:border-color 0.15s ease, color 0.15s ease;
   }
   .contact-links a:hover{border-color:var(--amber); color:var(--amber);}
+
+.now-playing{
+    display:flex; align-items:center; justify-content:flex-start;
+    margin-top:4px;
+  }
 
   footer{
     background:var(--ink); color:rgba(247,242,234,0.45);
@@ -181,27 +234,28 @@
 
 <header>
   <nav>
-    <div class="brand">Aylar<span style="color:var(--moss)">.</span></div>
     <ul class="navlinks">
       <li><a href="#about">About</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#experience">Experience</a></li>
+      <li><a href="#outside">Also, Me</a></li>
+      <li><a href="#blog">Notes</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
 </header>
 
-<!-- Genomic ruler divider, reused as a section signature -->
+<!-- Ruler divider, signature element -->
 <svg class="ruler" viewBox="0 0 920 34" preserveAspectRatio="none" aria-hidden="true">
   <line x1="0" y1="17" x2="920" y2="17" stroke="rgba(27,36,48,0.15)" stroke-width="1"/>
-  <g stroke="rgba(76,122,109,0.55)" stroke-width="1" font-family="IBM Plex Mono" font-size="8" fill="rgba(27,36,48,0.4)">
-    <line x1="20" y1="10" x2="20" y2="24"/><text x="24" y="12">chr1</text>
+  <g stroke="rgba(76,122,109,0.55)" stroke-width="1">
+    <line x1="20" y1="10" x2="20" y2="24"/>
     <line x1="180" y1="13" x2="180" y2="21"/>
     <line x1="340" y1="13" x2="340" y2="21"/>
-    <line x1="500" y1="10" x2="500" y2="24"/><text x="504" y="12">chr7</text>
+    <line x1="500" y1="10" x2="500" y2="24"/>
     <line x1="660" y1="13" x2="660" y2="21"/>
     <line x1="820" y1="13" x2="820" y2="21"/>
-    <line x1="900" y1="10" x2="900" y2="24"/><text x="866" y="12">chrX</text>
+    <line x1="900" y1="10" x2="900" y2="24"/>
   </g>
 </svg>
 
@@ -209,39 +263,68 @@
 
   <section class="hero" id="top">
     <div class="eyebrow">Bioinformatics Scientist</div>
-    <h1>Turning pediatric cancer genomic data into answers.</h1>
+    <h1>An engineer's mind, applied to biology.</h1>
     <p class="lede">
-      I build harmonized NGS pipelines and analysis workflows across large multi-cohort
-      pediatric cancer datasets — RNA-seq, WGS/WES, DNA methylation, and neoantigen
-      prediction — so researchers can trust what the data says.
+      I bring systems thinking to genomic data: taking engineering principles built for
+      one domain and applying them to another. I contribute to and help maintain
+      harmonized NGS pipelines and workflows across multi-cohort pediatric cancer
+      datasets, including RNA-seq, WGS/WES, DNA methylation, and neoantigen prediction,
+      so researchers can trust what the data says.
     </p>
     <div class="hero-links">
       <a class="btn solid" href="#projects">See my work</a>
-      <a class="btn ghost" href="#contact">Get in touch</a>
+      <a class="btn solid" href="resume.pdf" target="_blank" rel="noopener">Resume</a>
+      <a class="btn ghost" href="https://github.com/aylarba" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn ghost" href="https://www.linkedin.com/in/aylar-babaei/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn ghost" href="https://scholar.google.com/citations?user=tZqXjm8AAAAJ&hl=en" target="_blank" rel="noopener">Scholar</a>
+      <a class="btn ghost" href="https://x.com/aylllarba" target="_blank" rel="noopener">X</a>
     </div>
   </section>
 
   <section id="about" class="reveal">
     <div class="section-head">
-      <div class="section-num">01 — About</div>
+      <div class="section-num">01 · About</div>
       <h2>Background</h2>
     </div>
     <div class="about-grid">
       <p>
-        I'm a Bioinformatics Scientist working within a pediatric cancer research core,
-        where I develop and run NGS analysis pipelines — RNA-seq, WGS/WES, and DNA
-        methylation — across large harmonized cohorts, alongside HLA typing and
-        neoantigen prediction work. I build and maintain CWL workflows, run compute on
-        AWS and CAVATICA/Seven Bridges, and work across HPC environments in Python, R,
-        and Bash.
+        I started out in chemistry at Shiraz University, where quantum chemistry was
+        what first pulled me in. I loved that it was so unknown and so abstract, working
+        with things you could never directly see. Then COVID hit, and in the middle of
+        everything I found myself drawn to biology, AI, and math instead. That's where I
+        landed on bioinformatics, and I went on to get my Master's in it, curious about
+        how it applied to clinical trials and how rewarding that kind of work could be.
       </p>
       <p>
-        Before this, my graduate research focused on LC/MS metabolomics — quantifying
-        small molecules to understand disease-relevant biology, which is where my interest
-        in translating raw signal into biological insight first took shape. I hold an
-        M.S. in Bioinformatics and a B.S. in Chemistry.
+        During my Master's, alongside the computational work, I also kept and maintained
+        a mouse colony, hands-on wet-lab work that gave me a different kind of respect
+        for where the data actually comes from.
+      </p>
+      <p>
+        After graduating, I started out as a scientist analyzing data. About a year in,
+        I moved toward the engineering side of the work, contributing to the pipelines
+        and infrastructure that make that analysis possible at scale, which is where
+        I've stayed since.
+      </p>
+      <p>
+        Today, that means developing and contributing to NGS analysis pipelines,
+        including RNA-seq, WGS/WES, and DNA methylation, across large harmonized
+        pediatric cancer cohorts, alongside HLA typing and neoantigen prediction work.
+        I work with CWL workflows, run compute on AWS and CAVATICA/Seven Bridges, and
+        work across HPC environments in Python, R, and Bash.
+      </p>
+      <p>
+        What excites me most right now is where engineering and AI agents are heading.
+        There's real room to build, and I think a creative mind, critical thinking, and
+        systems thinking matter more than ever because of it. What I'm working toward is
+        the next step in that same shift: moving from contributing to pipelines to
+        building them from the ground up, taking the engineering edge and systems
+        thinking I've developed inside genomics and applying it more broadly, wherever
+        complex, multidisciplinary problems need someone who can design the
+        infrastructure underneath them.
       </p>
       <div class="pillrow">
+        <span class="pill">Systems Thinking</span>
         <span class="pill">NGS Pipelines</span>
         <span class="pill">HLA Typing &amp; Neoantigens</span>
         <span class="pill">Multi-cohort Harmonization</span>
@@ -253,96 +336,113 @@
 
   <section id="projects" class="reveal">
     <div class="section-head">
-      <div class="section-num">02 — Selected Work</div>
+      <div class="section-num">02 · Selected Work</div>
       <h2>Projects</h2>
     </div>
 
     <div class="project">
-      <div class="project-tag">Manuscript</div>
+      <div class="project-tag">Harmonization Automation</div>
       <div>
-        <h3>NF1 Neoantigen Data Audit</h3>
+        <h3>Multi-Cohort Pipeline Debugging &amp; Reruns</h3>
         <p>
-          Led a full data audit for an NF1 neoantigen manuscript ahead of submission,
-          identifying and resolving a denominator discrepancy and a figure mismatch that
-          would have affected the reported results.
+          Run multi-cohort genomic data harmonization workflows on raw RNA-seq and DNA
+          sequencing data alongside senior bioinformatics staff, debugging and resolving
+          pipeline errors, rerunning failed jobs, and documenting fixes to support
+          reproducibility.
         </p>
-        <div class="stackline">HLA typing · neoantigen prediction · QC</div>
+        <div class="stackline">RNA-seq · WGS/WES · CWL · reproducibility</div>
       </div>
     </div>
 
     <div class="project">
-      <div class="project-tag">Pipeline</div>
+      <div class="project-tag">HLA Typing &amp; Neoantigens</div>
       <div>
-        <h3>RNA-seq Merge Workflow, DepMap Cohort</h3>
+        <h3>Immunogenomics Workflows</h3>
         <p>
-          Executed a CWL-based RNA-seq merge pipeline end-to-end on EC2 using cwltool
-          for a large-scale DepMap cohort, handling the infrastructure and data
-          orchestration required to process it reliably at scale.
+          Built HLA typing and neoantigen prediction workflows (RNA2HLA, arcasHLA,
+          IEDB-based MHC I binding) for immunogenomics analyses, and led a data audit for
+          an NF1 neoantigen manuscript ahead of submission.
         </p>
-        <div class="stackline">CWL · AWS EC2 · cwltool</div>
+        <div class="stackline">RNA2HLA · arcasHLA · IEDB · QC</div>
       </div>
     </div>
 
     <div class="project">
-      <div class="project-tag">Data Harmonization</div>
+      <div class="project-tag">Workflow Pipelines</div>
       <div>
-        <h3>Cross-Cohort DNA Methylation Reference Table</h3>
+        <h3>Production Pipeline Contributions (CWL)</h3>
         <p>
-          Built an IDAT cross-reference table spanning multiple pediatric cancer cohorts
-          (MCI, PBTA, RBT, NF1) to unify methylation array sample tracking across
-          previously siloed datasets.
+          Contribute to production pipeline pull requests under senior bioinformatics
+          staff direction, including methylation-based rare tumor subtyping within a
+          national genomics consortium (OpenPedCan), using CWL and Git/GitHub for version
+          control.
         </p>
-        <div class="stackline">DNA methylation · Python · multi-cohort QC</div>
+        <div class="stackline">CWL · Git/GitHub · OpenPedCan</div>
       </div>
     </div>
 
     <div class="project">
-      <div class="project-tag">Open Science</div>
+      <div class="project-tag">File Warehouse · In Progress</div>
       <div>
-        <h3>OpenPedCan Rare CNS Molecular Subtyping</h3>
+        <h3>Data Warehousing for Multi-Cohort File Tracking</h3>
         <p>
-          Contributed a pull request implementing DKFZ v12 methylation-based
-          classification for rare CNS tumor subtyping within the open-source OpenPedCan
-          project.
+          Currently working on a file warehouse system to bring more structure and
+          traceability to how multi-cohort genomic files are tracked and stored.
         </p>
-        <div class="stackline">Methylation classification · open-source · R</div>
+        <div class="stackline">Data warehousing · schema design · in progress</div>
       </div>
     </div>
   </section>
 
   <section id="experience" class="reveal">
     <div class="section-head">
-      <div class="section-num">03 — Experience</div>
+      <div class="section-num">03 · Experience</div>
       <h2>Where I've worked</h2>
     </div>
 
     <div class="exp">
-      <div class="exp-date">2023 — Present</div>
+      <div class="exp-date">Jun 2024 to Present</div>
       <div>
         <h3>Bioinformatics Scientist</h3>
         <div class="org">BTI Bioinformatics Core · Children's National Hospital</div>
         <p>
           NGS analysis across RNA-seq, WGS/WES, and DNA methylation for pediatric cancer
-          cohorts; HLA typing and neoantigen prediction; CWL pipeline development on AWS
+          cohorts; HLA typing and neoantigen prediction; CWL pipeline contributions on AWS
           and CAVATICA; multi-cohort harmonization across Kids First and OpenPedCan.
         </p>
       </div>
     </div>
 
     <div class="exp">
-      <div class="exp-date">Graduate</div>
+      <div class="exp-date"></div>
       <div>
-        <h3>Graduate Researcher</h3>
-        <div class="org">Rahnavard Lab · George Washington University</div>
+        <h3>Graduate Research Assistant</h3>
+        <div class="org"><a href="https://rahnavard.org/research/" target="_blank" rel="noopener" style="color:var(--moss); text-decoration:none; border-bottom:1px solid var(--line);">Rahnavard Lab</a> · George Washington University</div>
         <p>
-          LC/MS metabolomics research on the iHMP/massSight projects — quantifying and
+          LC/MS metabolomics research on the iHMP/massSight projects, quantifying and
           interpreting small-molecule signal in large-scale human microbiome data.
         </p>
       </div>
     </div>
 
     <div class="exp">
-      <div class="exp-date">Undergraduate</div>
+      <div class="exp-date"></div>
+      <div>
+        <h3>Graduate Lab Assistant</h3>
+        <div class="org">GWU Cancer Center, Pathology Lab</div>
+        <p>
+          Supported translational cancer biology studies on CDKN2A/P16 deletion and KRAS
+          activation in mouse intestinal epithelial cells, assisting with Visium spatial
+          transcriptomics generation, tracking, IHC workflows, and genotyping. Managed a
+          database of over 2,000 laboratory mice, maintaining breeding, genotype, and
+          health records, and assisted with breeding, weaning, and IP injections in
+          support of the mouse model study.
+        </p>
+      </div>
+    </div>
+
+    <div class="exp">
+      <div class="exp-date"></div>
       <div>
         <h3>B.S. Chemistry</h3>
         <div class="org">Shiraz University</div>
@@ -353,7 +453,7 @@
 
   <section id="skills" class="reveal">
     <div class="section-head">
-      <div class="section-num">04 — Toolkit</div>
+      <div class="section-num">04 · Toolkit</div>
       <h2>Tech stack</h2>
     </div>
     <div class="skills-track">
@@ -372,25 +472,86 @@
     </div>
   </section>
 
+  <section id="outside" class="reveal">
+    <div class="section-head">
+      <div class="section-num">05 · Also, Me</div>
+      <h2>The parts that don't fit in a pipeline</h2>
+    </div>
+    <div class="outside-grid">
+      <div class="outside-card">
+        <h3>Piano</h3>
+        <p>
+          I take weekly piano lessons, slow, deliberate practice that's become the
+          nicest counterweight to a day of pipelines and terminal windows.
+        </p>
+      </div>
+      <div class="outside-card">
+        <h3>Languages</h3>
+        <p>
+          Native in Farsi, and currently learning French. I like that learning a
+          language never really finishes.
+        </p>
+      </div>
+      <div class="outside-card">
+        <h3>Cooking</h3>
+        <p>
+          I cook and bake fast and by feel: always creative, always experimenting with
+          something new, and always more fun when I get to share it.
+        </p>
+      </div>
+      <div class="outside-card">
+        <h3>Fitness &amp; Health</h3>
+        <p>
+          I'm an active person at heart, staying on top of exercise, sports, and
+          nutrition isn't a chore for me, it's part of how I stay sharp and balanced.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="blog" class="reveal">
+    <div class="section-head">
+      <div class="section-num">06 · Notes</div>
+      <h2>From the pipeline &amp; the terminal</h2>
+      <p style="margin-top:12px; font-family:var(--mono); font-size:0.85rem;">
+        <a href="https://substack.com/@aylar639639" target="_blank" rel="noopener" style="color:var(--moss); border-bottom:1px solid var(--moss); padding-bottom:1px; text-decoration:none;">Read more on my Substack →</a>
+      </p>
+    </div>
+    <div id="notes-list"></div>
+  </section>
+
 </div>
 
 <section id="contact" class="contact reveal">
   <div class="wrap">
-    <div class="section-num">05 — Contact</div>
+    <div class="section-num">07 · Contact</div>
     <h2>Let's talk</h2>
     <p class="lede">
-      Open to conversations about pediatric cancer genomics, bioinformatics roles, and
-      collaborations. Reach out any time.
+      Open to conversations about opportunities. Reach out any time.
     </p>
     <div class="contact-links">
-      <a href="mailto:your.email@example.com">your.email@example.com</a>
-      <a href="https://github.com/your-github" target="_blank" rel="noopener">github.com/your-github</a>
-      <a href="https://www.linkedin.com/in/your-linkedin" target="_blank" rel="noopener">linkedin.com/in/your-linkedin</a>
+      <a href="resume.pdf" target="_blank" rel="noopener">Download my resume (PDF)</a>
+      <a href="mailto:babaei.aylar@gmail.com">babaei.aylar@gmail.com</a>
+      <a href="https://github.com/aylarba" target="_blank" rel="noopener">github.com/aylarba</a>
+      <a href="https://www.linkedin.com/in/aylar-babaei/" target="_blank" rel="noopener">linkedin.com/in/aylar-babaei</a>
+      <a href="https://scholar.google.com/citations?user=tZqXjm8AAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+      <a href="https://x.com/aylllarba" target="_blank" rel="noopener">x.com/aylllarba</a>
+      <a href="https://substack.com/@aylar639639" target="_blank" rel="noopener">Substack</a>
+    </div>
+    <p style="margin-top:26px; font-family:var(--mono); font-size:0.82rem; color:rgba(247,242,234,0.6);">
+      P.S. there's usually good music playing in the background while I work.
+    </p>
+    <div class="now-playing">
+      <a href="https://github.com/kittinan/spotify-github-profile" target="_blank" rel="noopener">
+        <img src="https://spotify-github-profile.kittinanx.com/api/view?uid=31ohaudotdwqe5uj73p6aenm6wpm&cover_image=true&theme=default&show_offline=false&background_color=121212&interchange=false&profanity=false&hide_remaster=false" alt="Spotify now playing" style="max-width:320px; border-radius:8px; margin-top:10px;">
+      </a>
     </div>
   </div>
 </section>
 
-<footer>© 2026 Aylar. Built with data and code.</footer>
+<footer>
+  © 2026 Aylar. Built with data and code.
+</footer>
 
 <script>
   const io = new IntersectionObserver((entries)=>{
@@ -399,6 +560,37 @@
     });
   }, {threshold:0.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // ---- Notes / Blog ----
+  // To add a note: add a new object to the TOP of this array, then commit + push.
+  // date: any short label you like ("Aug 2026", "2026-08-17", etc.)
+  // title: short headline
+  // body: your note text. Use \n\n for a paragraph break.
+  const notes = [
+    {
+      date: "Aug 2026",
+      title: "Welcome to my notes",
+      body: "This is where I'll jot down things I learn, pipeline quirks, papers worth remembering, or just thoughts from the week. More soon."
+    }
+  ];
+
+  const notesList = document.getElementById('notes-list');
+  notes.forEach((n, i) => {
+    const el = document.createElement('div');
+    el.className = 'note';
+    el.innerHTML = `
+      <div class="note-head">
+        <div>
+          <div class="note-date">${n.date}</div>
+          <div class="note-title">${n.title}</div>
+        </div>
+        <div class="note-toggle">+</div>
+      </div>
+      <div class="note-body"><div class="note-body-inner">${n.body.split('\n\n').map(p => `<p style="margin-bottom:10px;">${p}</p>`).join('')}</div></div>
+    `;
+    el.addEventListener('click', () => el.classList.toggle('open'));
+    notesList.appendChild(el);
+  });
 </script>
 
 </body>
